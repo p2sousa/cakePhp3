@@ -2,6 +2,7 @@
 ##########################
 /config/app.php
 /config/.env
+/config/Migrations/schema-dump-default.lock
 /logs/*
 /logs/.gitkeep
 /tmp/*
