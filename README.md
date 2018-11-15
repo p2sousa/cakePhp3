@@ -1,51 +1,45 @@
-# CakePHP Application Skeleton
+# CakePhp 3 CRUD
 
-[![Build Status](https://img.shields.io/travis/cakephp/app/master.svg?style=flat-square)](https://travis-ci.org/cakephp/app)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
+# Setup
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 3.x.
-
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
-
-## Installation
-
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
-
-If Composer is installed globally, run
+1. clone docker repository:
 
 ```bash
-composer create-project --prefer-dist cakephp/app
+$ git clone https://github.com/p2sousa/docker-php-nginx.git
+$ cp env.dist .env
+$ vim .env
+GITHUB_OAUTH=
+MYSQL_ROOT_PASSWORD=YOU_PASSWORD
+MYSQL_DATABASE=YOU_DATABASE
+MYSQL_USER=YOU_USER
+MYSQL_PASSWORD=YOU_MYSQL_PASSWORD
 ```
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
+2. clone this repository in folder application\
 
 ```bash
-composer create-project --prefer-dist cakephp/app myapp
+$ cd application
+$ git clone https://github.com/p2sousa/cakePhp3.git cake
 ```
-
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
+3. configure CakePhp3
 
 ```bash
-bin/cake server -p 8765
+$ cd cake/config
+$ cp app.default.php app.php
 ```
 
-Then visit `http://localhost:8765` to see the welcome page.
+4. build and up docker
 
-## Update
+```bash
+$ cd ../../../
+$ docker-compose build
+$ docker-compose up -d
+$ docker exec application composer update
+```
+5. In your local OS, add a domain entry for cake.localhost in your /etc/hosts
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
+```bash
+$: sudo vim /etc/hosts
 
-## Configuration
-
-Read and edit `config/app.php` and setup the `'Datasources'` and any other
-configuration relevant for your application.
-
-## Layout
-
-The app skeleton uses a subset of [Foundation](http://foundation.zurb.com/) (v5) CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+127.0.0.1	localhost   cake.localhost
+```
