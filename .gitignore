@@ -3,8 +3,11 @@
 /config/app.php
 /config/.env
 /logs/*
+/logs/.gitkeep
 /tmp/*
+!/tmp/.gitkeep
 /vendor/*
+composer.lock
 
 # OS generated files #
 ######################
