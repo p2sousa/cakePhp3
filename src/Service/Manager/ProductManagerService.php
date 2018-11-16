@@ -94,6 +94,27 @@ class ProductManagerService
     }
     
     /**
+     * delete a product
+     * 
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete(): bool
+    {
+        if (!$this->product) {
+            throw new \Exception('Product are null.');
+        }
+        
+        if (!$this->service->Products->delete($this->product)) {
+            throw new \Exception(
+                'The product could not be deleted. Please, try again.'
+            );
+        }
+        
+        return true;
+    }
+    
+    /**
      * set current Product
      * 
      * @param int $id
