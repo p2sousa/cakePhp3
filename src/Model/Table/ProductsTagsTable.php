@@ -80,4 +80,41 @@ class ProductsTagsTable extends Table
 
         return $rules;
     }
+    
+    /**
+     * search the most used tags in products.
+     * 
+     * @param int $limit number of tags to search 
+     * @return array tags mostUsed
+     */
+    public function findTagsMostUsed(int $limit): array
+    {
+        return $this
+            ->find('list',[
+                'keyField' => function(){return;},
+                'valueField' => function($q) {
+                    return [
+                        'tag' => $q->tag->name,
+                        'total' => $q->count,
+                    ];
+                },
+            ])
+            ->select([
+                'ProductsTags.id',
+                'Tags.name',
+                'Tags.id',
+                'count' => $this->find()->func()->count('*')
+            ])
+            ->contain([
+                'Tags',
+                'Products'
+            ])
+            ->where([
+               'tag_id IS NOT NULL',
+            ])
+            ->group(['Tags.id'])
+            ->order(['count' => 'desc'])
+            ->limit($limit)
+            ->toArray();
+    }
 }
