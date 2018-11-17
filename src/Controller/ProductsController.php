@@ -15,6 +15,16 @@ use Cake\Http\Response;
  */
 class ProductsController extends AppController
 {
+    /**
+     * Initialization hook method.
+     *
+     * @return void
+     */
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->viewBuilder()->setLayout('default');
+    }
 
     /**
      * Index method
@@ -22,7 +32,7 @@ class ProductsController extends AppController
      * @return void
      */
     public function index(): void
-    {
+    {      
         $products = $this->paginate($this->Products);
 
         $this->set(compact('products'));

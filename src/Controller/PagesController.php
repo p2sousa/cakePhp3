@@ -27,8 +27,18 @@ use Cake\View\Exception\MissingTemplateException;
  * @link https://book.cakephp.org/3.0/en/controllers/pages-controller.html
  */
 class PagesController extends AppController
-{
-
+{   
+    /**
+     * Initialization hook method.
+     *
+     * @return void
+     */
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->viewBuilder()->setLayout('default');
+    }
+    
     /**
      * Displays a view
      *

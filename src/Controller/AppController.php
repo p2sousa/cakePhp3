@@ -45,6 +45,7 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
+        $this->viewBuilder()->setLayout('manager');
 
         /*
          * Enable the following component for recommended CakePHP security settings.
