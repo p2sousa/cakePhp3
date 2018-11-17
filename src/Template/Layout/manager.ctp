@@ -31,7 +31,7 @@ $cakeDescription = 'CakePHP: CRUD Produc';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <?= $this->Html->css('dashboard.css') ?>
-        
+
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
@@ -56,16 +56,30 @@ $cakeDescription = 'CakePHP: CRUD Produc';
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <span data-feather="home"></span>
-                                Dashboard <span class="sr-only">(current)</span>
-                            </a>
+                            <?= $this->Html->link(
+                                __('<span data-feather="shopping-cart"></span>Products'),
+                                [
+                                    'controller' => 'Products',
+                                    'action' => 'index',
+                                ],
+                                [
+                                    'class' => 'nav-link',
+                                    'escape' => false
+                                ]
+                            ); ?>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="shopping-cart"></span>
-                                Products
-                            </a>
+                            <?= $this->Html->link(
+                                __('<span data-feather="home"></span>Reports'),
+                                [
+                                    'controller' => 'Reports',
+                                    'action' => 'index',
+                                ],
+                                [
+                                    'class' => 'nav-link',
+                                    'escape' => false
+                                ]
+                            ); ?>
                         </li>
                     </ul>
                 </div>

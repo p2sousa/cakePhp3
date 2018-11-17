@@ -23,7 +23,6 @@ class ProductsController extends AppController
     public function initialize(): void
     {
         parent::initialize();
-        $this->viewBuilder()->setLayout('default');
     }
 
     /**
@@ -34,7 +33,7 @@ class ProductsController extends AppController
     public function index(): void
     {      
         $products = $this->paginate($this->Products);
-
+        // TODO: implement bootstrap paginate in view.
         $this->set(compact('products'));
     }
 

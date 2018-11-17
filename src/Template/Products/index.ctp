@@ -4,54 +4,57 @@
  * @var \App\Model\Entity\Product[]|\Cake\Collection\CollectionInterface $products
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Tags'), ['controller' => 'Tags', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Tag'), ['controller' => 'Tags', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="products index large-9 medium-8 columns content">
-    <h3><?= __('Products') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('title') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('image') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('stock') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($products as $product): ?>
-            <tr>
-                <td><?= $this->Number->format($product->id) ?></td>
-                <td><?= h($product->title) ?></td>
-                <td><?= h($product->image) ?></td>
-                <td><?= $this->Number->format($product->stock) ?></td>
-                <td><?= h($product->created) ?></td>
-                <td><?= h($product->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $product->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $product->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $product->id], ['confirm' => __('Are you sure you want to delete # {0}?', $product->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            
+            <div class="row">
+                <?php foreach ($products as $product): ?>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img class="card-img-top" src="img/cake-logo.png" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text"><?= h($product->title) ?></p>
+                            <p class="card-text">Stock: <?= $this->Number->format($product->stock) ?></p>
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <?= $this->Html->link(__('View'), 
+                                        ['action' => 'view', $product->id],
+                                        ['class' => 'btn btn-sm btn-outline-secondary']
+                                    ) ?>
+                                    
+                                    <?= $this->Html->link(__('Edit'), 
+                                        ['action' => 'edit', $product->id],
+                                        ['class' => 'btn btn-sm btn-outline-secondary']
+                                    ) ?>
+                                    <?= $this->Form->postLink(__('Delete'), 
+                                        ['action' => 'delete', $product->id], 
+                                        [
+                                            'confirm' => __('Are you sure you want to delete # {0}?', 
+                                            $product->id),
+                                            'class' => 'btn btn-sm btn-outline-danger'
+                                        ]
+                                    ) ?>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="paginator">
+                <ul class="pagination">
+                    <?= $this->Paginator->first('<< ' . __('first')) ?>
+                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                    <?= $this->Paginator->numbers() ?>
+                    <?= $this->Paginator->next(__('next') . ' >') ?>
+                    <?= $this->Paginator->last(__('last') . ' >>') ?>
+                </ul>
+                <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+            </div>
+        </div>
     </div>
-</div>
+</main>
