@@ -46,6 +46,7 @@ class ProductsController extends AppController
      */
     public function view(string $id = null): void
     {
+//        $this->viewBuilder()->setLayout('default');
         $product = $this->Products->get($id, [
             'contain' => ['Tags']
         ]);
