@@ -9,6 +9,7 @@
 !/tmp/.gitkeep
 /vendor/*
 composer.lock
+/webroot/Uploads/*
 
 # OS generated files #
 ######################
