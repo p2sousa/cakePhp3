@@ -15,6 +15,10 @@
             <h3><?= h($product->title) ?></h3>
             <table class="table">
                 <tr>
+                    <th scope="row"><?= __('Image') ?></th>
+                    <td> <img src="<?= h($product->image) ?>" alt="Product" class="img-fluid img-thumbnail" style="height: 200px"></td>
+                </tr>
+                <tr>
                     <th scope="row"><?= __('Id') ?></th>
                     <td><?= $this->Number->format($product->id) ?></td>
                 </tr>
@@ -25,10 +29,6 @@
                 <tr>
                     <th scope="row"><?= __('Stock') ?></th>
                     <td><?= $this->Number->format($product->stock) ?></td>
-                </tr>
-                <tr>
-                    <th scope="row"><?= __('Image') ?></th>
-                    <td><?= h($product->image) ?></td>
                 </tr>
                 <tr>
                     <th scope="row"><?= __('Created') ?></th>
