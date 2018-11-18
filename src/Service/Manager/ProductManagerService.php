@@ -158,7 +158,6 @@ class ProductManagerService
 
             return $upload->getPath();
         } catch (\Exception $exc) {
-            debug($exc);die;
             return null;
         }
     }

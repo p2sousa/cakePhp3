@@ -78,6 +78,22 @@ trait FileUploadTrait
     }
     
     /**
+     * 
+     * @param File $file
+     * @param int $limit
+     * @return bool
+     * @throws \Exception
+     */
+    public function handleSize(File $file, int $limit = 5000000): bool
+    {
+        if ($file->size() > $limit) {
+            throw new \Exception('size limit is: ' . $limit);
+        }
+
+        return true;
+    }
+    
+    /**
      * @param string $file
      * @return File
      */
@@ -95,6 +111,7 @@ trait FileUploadTrait
     {
         try {
             $this->handleMimeType($file, $this->acceptMimeTypes());
+            $this->handleSize($file);
             
             return $file;
             

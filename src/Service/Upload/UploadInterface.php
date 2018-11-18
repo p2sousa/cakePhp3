@@ -29,6 +29,14 @@ interface UploadInterface
      * @return bool
      */
     public function handleMimeType(File $file, array $mimeTypes): bool;
+    
+    /**
+     * 
+     * @param File $file
+     * @param int $limit
+     * @return bool
+     */
+    public function handleSize(File $file, int $limit): bool;
 
     /**
      * @param string $file
@@ -54,5 +62,11 @@ interface UploadInterface
      * @return string
      */
     public function getPath(): string;
+    
+    /**
+     * @param string $path
+     * @return bool
+     */
+    public function delete(string $path): bool;
     
 }
