@@ -69,37 +69,6 @@ class ProductManagerService
     }
     
     /**
-     * 
-     * @return string|null
-     * @throws \Exception
-     */
-    public function upload(): ?string
-    {
-        try {
-            if (!$this->service->request->getData('image.tmp_name')) {
-                throw new \Exception('file not sent');
-            }
-            
-            $filename = $this->service->request->getData('image.tmp_name');
-
-            $upload = new ProductUpload();
-
-            $folder = $upload->createFolder();
-            $file = $upload->handleFile(
-                $upload->file($filename)
-            );
-
-            $upload->upload($file, $folder);
-
-            return $upload->getPath();
-        } catch (\Exception $exc) {
-            debug($exc);die;
-            return null;
-        }
-    }
-
-
-    /**
      * update a product.
      * 
      * @return Product
@@ -115,9 +84,13 @@ class ProductManagerService
             throw new \Exception('Product are null.');
         }
         
+        $requestData = $this->service->request->getData();
+        
+        $requestData['image'] = $this->upload();
+        
         $this->product = $this->service->Products->patchEntity(
             $this->product, 
-            $this->service->request->getData()
+            $requestData
         );
 
         if (!$this->service->Products->save($this->product)) {
@@ -141,6 +114,12 @@ class ProductManagerService
             throw new \Exception('Product are null.');
         }
         
+        $upload = new ProductUpload();
+            
+        if ($this->product->image) {
+            $upload->delete($this->product->image);
+        }
+        
         if (!$this->service->Products->delete($this->product)) {
             throw new \Exception(
                 'The product could not be deleted. Please, try again.'
@@ -148,6 +127,40 @@ class ProductManagerService
         }
         
         return true;
+    }
+    
+    /**
+     * 
+     * @return string|null
+     * @throws \Exception
+     */
+    public function upload(): ?string
+    {
+        try {
+            if (!$this->service->request->getData('image.tmp_name')) {
+                throw new \Exception('file not sent');
+            }
+            
+            $filename = $this->service->request->getData('image.tmp_name');
+
+            $upload = new ProductUpload();
+            
+            if ($this->product->image) {
+                $upload->delete($this->product->image);
+            }
+
+            $folder = $upload->createFolder();
+            $file = $upload->handleFile(
+                $upload->file($filename)
+            );
+
+            $upload->upload($file, $folder);
+
+            return $upload->getPath();
+        } catch (\Exception $exc) {
+            debug($exc);die;
+            return null;
+        }
     }
     
     /**

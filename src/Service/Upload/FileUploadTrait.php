@@ -137,4 +137,18 @@ trait FileUploadTrait
         
         return DS . $this->folder . $this->file->name;
     }
+    
+    /**
+     * 
+     * @param string $path
+     * @return bool
+     */
+    public function delete(string $path): bool 
+    {
+        if (!unlink(WWW_ROOT . $path)) {
+            return false;
+        }
+        
+        return true;
+    }
 }
