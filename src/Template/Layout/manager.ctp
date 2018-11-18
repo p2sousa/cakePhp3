@@ -85,10 +85,13 @@ $cakeDescription = 'CakePHP: CRUD Produc';
                 </div>
             </nav>
             <!-- END Menu -->
+            
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <?= $this->Flash->render() ?>
+                <?= $this->fetch('content') ?>
+            </main>
 
-            <?= $this->Flash->render() ?>
 
-            <?= $this->fetch('content') ?>
         </div>
     </div>
     
