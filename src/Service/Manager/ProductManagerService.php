@@ -4,6 +4,7 @@ namespace App\Service\Manager;
 
 use App\Controller\ProductsController;
 use App\Model\Entity\Product;
+use App\Service\Upload\ProductUpload;
 
 /**
  *  ProductManagerService
@@ -49,9 +50,13 @@ class ProductManagerService
         
         $this->product = $this->service->Products->newEntity();
         
+        $requestData = $this->service->request->getData();
+        
+        $requestData['image'] = $this->upload();
+        
         $this->product = $this->service->Products->patchEntity(
             $this->product, 
-            $this->service->request->getData()
+            $requestData
         );
 
         if (!$this->service->Products->save($this->product)) {
@@ -63,6 +68,37 @@ class ProductManagerService
         return $this->product;
     }
     
+    /**
+     * 
+     * @return string|null
+     * @throws \Exception
+     */
+    public function upload(): ?string
+    {
+        try {
+            if (!$this->service->request->getData('image.tmp_name')) {
+                throw new \Exception('file not sent');
+            }
+            
+            $filename = $this->service->request->getData('image.tmp_name');
+
+            $upload = new ProductUpload();
+
+            $folder = $upload->createFolder();
+            $file = $upload->handleFile(
+                $upload->file($filename)
+            );
+
+            $upload->upload($file, $folder);
+
+            return $upload->getPath();
+        } catch (\Exception $exc) {
+            debug($exc);die;
+            return null;
+        }
+    }
+
+
     /**
      * update a product.
      * 

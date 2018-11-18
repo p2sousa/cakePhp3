@@ -26,7 +26,9 @@
                 </div>
                 <div class="form-group">
                     <?= $this->Form->control('image', [
-                        'class' => 'form-control'
+                        'type' => 'file',
+                        'class' => 'form-control-file',
+                        'accept' => 'image/x-png, image/gif, image/jpeg',
                     ]); ?>
                 </div>
                 <div class="form-group">

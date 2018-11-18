@@ -11,7 +11,7 @@
     
     <div class="album py-5 bg-light">
         <div class="container">
-            <?= $this->Form->create($product) ?>
+            <?= $this->Form->create($product, ['type' => 'file']) ?>
                 <div class="form-group">
                     <?= $this->Form->control('title', [
                         'class' => 'form-control',
@@ -26,7 +26,9 @@
                 </div>
                 <div class="form-group">
                     <?= $this->Form->control('image', [
-                        'class' => 'form-control'
+                        'type' => 'file',
+                        'class' => 'form-control-file',
+                        'accept' => 'image/x-png, image/gif, image/jpeg'
                     ]); ?>
                 </div>
                 <div class="form-group">
