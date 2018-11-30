@@ -10,6 +10,7 @@
 /vendor/*
 composer.lock
 /webroot/Uploads/*
+/webroot/coverage/*
 
 # OS generated files #
 ######################
