@@ -77,6 +77,6 @@ $ bin/cake migrations seed
 
 6. Done! now you can create your products
 
-7. Access: http://cake.localhost to CakePhp Root (Documentation)
+7. Access: http://cake.localhost  to CakePhp Root (Documentation)
 
-8. Access: http://cake.localhost/products to CRUD example
+8. Access: http://cake.localhost/products  to CRUD example
